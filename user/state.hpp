@@ -58,6 +58,8 @@ public:
     int KillDistance = 0;
     int PrevTaskBarUpdates = 0;
     int TaskBarUpdates = 0;
+    int FakeRole = 0;
+    bool FakeRoleToggle = 0;
 
     bool NoAbilityCD = false;
     bool NoClip = false;

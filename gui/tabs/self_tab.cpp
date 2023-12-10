@@ -122,6 +122,33 @@ namespace SelfTab {
                 State.Save();
             }
 
+            if (CustomListBoxInt("Select Role", &State.FakeRole, FAKEROLES, 100.0f * State.dpiScale))
+                State.Save();
+            ImGui::SameLine();
+            if (IsInGame() && ImGui::Button("Set Role")) {
+                auto fakeRole = RoleTypes__Enum::Crewmate;
+                if (State.FakeRole == 0)
+                    fakeRole = RoleTypes__Enum::Crewmate;
+                else if (State.FakeRole == 1)
+                    fakeRole = RoleTypes__Enum::Scientist;
+                else if (State.FakeRole == 2)
+                    fakeRole = RoleTypes__Enum::Engineer;
+                else if (State.FakeRole == 3)
+                    fakeRole = RoleTypes__Enum::Impostor;
+                else if (State.FakeRole == 4)
+                    fakeRole = RoleTypes__Enum::Shapeshifter;
+                else if (State.FakeRole == 5)
+                    fakeRole = RoleTypes__Enum::CrewmateGhost;
+                else if (State.FakeRole == 6)
+                    fakeRole = RoleTypes__Enum::GuardianAngel;
+                else if (State.FakeRole == 7)
+                    fakeRole = RoleTypes__Enum::ImpostorGhost;
+                if (IsInGame())
+                    State.rpcQueue.push(new RpcSetRole(*Game::pLocalPlayer, fakeRole));
+                else if (IsInLobby())
+                    State.lobbyRpcQueue.push(new RpcSetRole(*Game::pLocalPlayer, fakeRole));
+            }
+
             ImGui::EndTabItem();
         }
     }
