@@ -59,6 +59,7 @@ public:
     int PrevTaskBarUpdates = 0;
     int TaskBarUpdates = 0;
 
+    bool NoAbilityCD = false;
     bool NoClip = false;
     bool HotkeyNoClip = false;
 
