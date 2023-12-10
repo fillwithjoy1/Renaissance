@@ -1,0 +1,64 @@
+name: Build Project
+
+on:
+  push:
+  workflow_dispatch:
+  
+jobs:
+  Build_Release:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+      
+      - name: Build Release
+        shell: bash
+        run: '"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/Msbuild/Current/Bin/MSBuild.exe" -property:Configuration=Release'
+        
+      - name: Build Release_Version
+        shell: bash
+        run: '"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/Msbuild/Current/Bin/MSBuild.exe" -property:Configuration=Release_Version'
+        
+      - name: Package Release Builds
+        if: ${{ github.event_name == 'push' }}
+        shell: cmd
+        run: |
+          move /y Release\AmongUsMenu.dll AmongUsMenu.dll
+          move /y Release_Version\version.dll version.dll
+          tar -caf Release.zip AmongUsMenu.dll version.dll LICENSE
+        
+      - name: Upload Release Artifact
+        if: ${{ github.event_name == 'push' }}
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          name: Release
+          path: Release.zip
+          
+#  Build_Debug:
+#    runs-on: windows-2022
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2.3.4
+#
+#      - name: Build Debug
+#        shell: bash
+#        run: '"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/Msbuild/Current/Bin/MSBuild.exe" -property:Configuration=Debug'
+#
+#      - name: Build Debug_Version
+#        shell: bash
+#        run: '"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/Msbuild/Current/Bin/MSBuild.exe" -property:Configuration=Debug_Version'
+#
+#      - name: Package Debug Builds
+#        if: ${{ github.event_name == 'push' }}
+#        shell: cmd
+#        run: |
+#          move /y Debug\AmongUsMenu.dll AmongUsMenu.dll
+#          move /y Debug_Version\version.dll version.dll
+#          tar -caf Debug.zip AmongUsMenu.dll version.dll LICENSE
+#
+#      - name: Upload Debug Artifact
+#        if: ${{ github.event_name == 'push' }}
+#        uses: actions/upload-artifact@v2.2.3
+#        with:
+#          name: Debug
+#          path: Debug.zip
