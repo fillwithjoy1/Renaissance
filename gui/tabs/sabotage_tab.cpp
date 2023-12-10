@@ -9,7 +9,7 @@
 namespace SabotageTab {
     void Render() {
         GameOptions options;
-        if (IsInGame() && options.GetGameMode() != GameModes__Enum::HideNSeek) {
+        if (IsInGame()) {
             if (ImGui::BeginTabItem("Sabotage")) {
                 ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
                 if (ImGui::Button("Repair Sabotage")) {
