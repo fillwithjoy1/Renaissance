@@ -51,11 +51,25 @@ namespace SabotageTab {
                     State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::Comms));
                 }
                 if (ImGui::Button("Sabotage All")) {
-                    State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::Comms));
-                    if (State.mapType == Settings::MapType::Ship || State.mapType == Settings::MapType::Hq || State.mapType == Settings::MapType::Fungle) {
-                        State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::Reactor));
+                    if (State.mapType != Settings::MapType::Fungle) { //lights don't work on fungle
+                        for (size_t i = 0; i < 5; i++)
+                            State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::Electrical, i));
                     }
-                    State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Electrical, 5));
+
+                    if (State.mapType == Settings::MapType::Ship || State.mapType == Settings::MapType::Hq || State.mapType == Settings::MapType::Fungle)
+                        State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::Reactor, 128));
+                    else if (State.mapType == Settings::MapType::Pb)
+                        State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::Laboratory, 128));
+                    else if (State.mapType == Settings::MapType::Airship)
+                        State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::Reactor, 128));
+
+                    if (State.mapType == Settings::MapType::Ship || State.mapType == Settings::MapType::Hq)
+                        State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::LifeSupp, 128));
+
+                    if (State.mapType == Settings::MapType::Fungle)
+                        State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::MushroomMixupSabotage));
+
+                    State.rpcQueue.push(new RpcUpdateSystem(SystemTypes__Enum::Comms, 128));
                 }
 
                 ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
