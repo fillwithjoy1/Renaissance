@@ -144,7 +144,7 @@ namespace PlayersTab {
 							ImpersonateName(selectedPlayer.get_PlayerData());
 						}
 					}
-					if ((IsInGame() ||KIll IsInLobby())) {
+					if ((IsInGame() || IsInLobby())) {
 						if (!selectedPlayer.is_LocalPlayer()) {
 							app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(selectedPlayer.get_PlayerData());
 							if (outfit != NULL) {
