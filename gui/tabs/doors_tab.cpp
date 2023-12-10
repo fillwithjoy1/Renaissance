@@ -11,7 +11,7 @@ using namespace std::string_view_literals;
 namespace DoorsTab {
 	void Render() {
 		GameOptions options;
-		if (IsInGame() && !State.mapDoors.empty() && options.GetGameMode() != GameModes__Enum::HideNSeek) {
+		if (IsInGame() && !State.mapDoors.empty()) {
 			if (ImGui::BeginTabItem("Doors")) {
 				ImGui::BeginChild("doors#list", ImVec2(200, 0) * State.dpiScale, true);
 				bool shouldEndListBox = ImGui::ListBoxHeader("###doors#list", ImVec2(200, 150) * State.dpiScale);
