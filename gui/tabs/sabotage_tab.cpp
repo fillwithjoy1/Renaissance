@@ -55,6 +55,7 @@ namespace SabotageTab {
                     if (State.mapType == Settings::MapType::Ship || State.mapType == Settings::MapType::Hq || State.mapType == Settings::MapType::Fungle) {
                         State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::Reactor))
                     }
+                    State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Electrical, 5));
                 }
 
                 ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
