@@ -190,12 +190,13 @@ namespace PlayersTab {
 						&& !selectedPlayer.get_PlayerControl()->fields.inVent
 						&& !selectedPlayer.get_PlayerControl()->fields.inMovingPlat
 						&& !GetPlayerData(*Game::pLocalPlayer)->fields.IsDead && ((*Game::pLocalPlayer)->fields.killTimer <= 0.0f)
-						&& selectedPlayer.get_PlayerControl()->fields.protectedByGuardianId < 0
-						&& !State.InMeeting)
+						&& selectedPlayer.get_PlayerControl()->fields.protectedByGuardianId <= -1)
 					{
-						if (ImGui::Button("Kill"))
+						if (ImGui::Button("Kill Player"))
 						{
-							State.rpcQueue.push(new CmdCheckMurder(State.selectedPlayer));
+							previousPlayerPosition = GetTrueAdjustedPosition(*Game::pLocalPlayer);
+							State.rpcQueue.push(new CmdCheckMurder(selectedPlayer));
+							framesPassed = 40;
 						}
 					}
 
