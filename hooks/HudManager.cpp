@@ -68,19 +68,3 @@ void dVersionShower_Start(VersionShower* __this, MethodInfo* method) {
 	app::TMP_Text_set_alignment((app::TMP_Text*)__this->fields.text, app::TextAlignmentOptions__Enum::TopLeft, nullptr);
 	app::TMP_Text_set_text((app::TMP_Text*)__this->fields.text, convert_to_string(versionText), nullptr);
 }
-
-void dPingTracker_Update(PingTracker* __this, MethodInfo* method) {
-	app::PingTracker_Update(__this, method);
-	std::string ping = convert_from_string(app::TMP_Text_get_text((app::TMP_Text*)__this->fields.text, nullptr));
-	std::string noClip = State.NoClip ? "\nNoClip" : "";
-	std::string freeCam = State.FreeCam ? "\nFreecam" : "";
-	std::string spectating = "";
-	if (State.playerToFollow.has_value()) {
-		app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(GetPlayerData(GetPlayerControlById(State.playerToFollow.get_PlayerId())));
-		spectating = "\nNow Spectating: " + convert_from_string(GameData_PlayerOutfit_get_PlayerName(outfit, nullptr));
-	}
-	else spectating = "";
-	std::string pingText = std::format("{}\n<size=100%><#a4b0a3>R</color><#9eaa9f>e</color><#97a49a>n</color><#919e95>a</color><#8b9790>i</color><#84928a>s</color><#7e8b85>s</color><#788580>a</color><#717f7b>n</color><#6b7976>c</color><#657271>e</color></size>", ping, noClip, freeCam, spectating);
-	app::TMP_Text_set_alignment((app::TMP_Text*)__this->fields.text, app::TextAlignmentOptions__Enum::TopRight, nullptr);
-	app::TMP_Text_set_text((app::TMP_Text*)__this->fields.text, convert_to_string(pingText), nullptr);
-}
