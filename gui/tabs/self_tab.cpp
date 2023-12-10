@@ -125,7 +125,7 @@ namespace SelfTab {
             if (CustomListBoxInt("Select Role", &State.FakeRole, FAKEROLES, 100.0f * State.dpiScale))
                 State.Save();
             ImGui::SameLine();
-            if (IsInGame() && ImGui::Button("Set Role")) {
+            if ((IsInGame() || IsInLobby()) && ImGui::Button("Set Role")) {
                 auto fakeRole = RoleTypes__Enum::Crewmate;
                 if (State.FakeRole == 0)
                     fakeRole = RoleTypes__Enum::Crewmate;
