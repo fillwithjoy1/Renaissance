@@ -151,7 +151,7 @@ namespace SelfTab {
 
             ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
 
-			if (ImGui::Checkbox("No Kill CD", &State.NoAbilityCD)) {
+			if (IsInGame() && ImGui::Checkbox("No Kill CD", &State.NoAbilityCD)) {
 			    State.Save();
 			}
 
