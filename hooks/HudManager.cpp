@@ -68,3 +68,19 @@ void dVersionShower_Start(VersionShower* __this, MethodInfo* method) {
 	app::TMP_Text_set_alignment((app::TMP_Text*)__this->fields.text, app::TextAlignmentOptions__Enum::TopLeft, nullptr);
 	app::TMP_Text_set_text((app::TMP_Text*)__this->fields.text, convert_to_string(versionText), nullptr);
 }
+
+void dPingTracker_Update(PingTracker* __this, MethodInfo* method) {
+	app::PingTracker_Update(__this, method);
+	std::string ping = convert_from_string(app::TMP_Text_get_text((app::TMP_Text*)__this->fields.text, nullptr));
+	std::string noClip = State.NoClip ? "\nNoClip" : "";
+	std::string freeCam = State.FreeCam ? "\nFreecam" : "";
+	std::string spectating = "";
+	if (State.playerToFollow.has_value()) {
+		app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(GetPlayerData(GetPlayerControlById(State.playerToFollow.get_PlayerId())));
+		spectating = "\nNow Spectating: " + convert_from_string(GameData_PlayerOutfit_get_PlayerName(outfit, nullptr));
+	}
+	else spectating = "";
+	std::string pingText = std::format("{}\n<#0f0>SickoMode</color><#f00>AU</color> <#0f0>v1.1</color>{}{}{}", ping, noClip, freeCam, spectating);
+	app::TMP_Text_set_alignment((app::TMP_Text*)__this->fields.text, app::TextAlignmentOptions__Enum::TopRight, nullptr);
+	app::TMP_Text_set_text((app::TMP_Text*)__this->fields.text, convert_to_string(pingText), nullptr);
+}
