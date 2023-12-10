@@ -51,7 +51,9 @@ namespace SabotageTab {
                     State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::Comms));
                 }
                 if (ImGui::Button("Sabotage All")) {
-
+                    if (State.mapType == Settings::MapType::Fungle) {
+                        State.rpcQueue.push(new RpcRepairSystem(SystemTypes__Enum::Sabotage, SystemTypes__Enum::MushroomMixupSabotage));
+                    }
                 }
 
                 ImGui::Dummy(ImVec2(7, 7) * State.dpiScale);
