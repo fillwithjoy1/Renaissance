@@ -82,6 +82,12 @@ namespace GameTab {
 				State.Save();
 			}
 
+			ImGui::Dummy(ImVec2(4, 4) * State.dpiScale);
+
+			if (ImGui::Checkbox("No Kill CD", &State.NoAbilityCD)) {
+			    State.Save();
+			}
+
 			ImGui::SameLine();
 
 			ImGui::SameLine();
