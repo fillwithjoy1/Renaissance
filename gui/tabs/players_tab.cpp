@@ -144,7 +144,7 @@ namespace PlayersTab {
 							ImpersonateName(selectedPlayer.get_PlayerData());
 						}
 					}
-					if ((IsInGame() || IsInLobby())) {
+					if ((IsInGame() ||KIll IsInLobby())) {
 						if (!selectedPlayer.is_LocalPlayer()) {
 							app::GameData_PlayerOutfit* outfit = GetPlayerOutfit(selectedPlayer.get_PlayerData());
 							if (outfit != NULL) {
@@ -185,12 +185,19 @@ namespace PlayersTab {
 						}
 					}
 
-					if (ImGui::Button("Kill Player"))
-                    {
-							previousPlayerPosition = GetTrueAdjustedPosition(*Game::pLocalPlayer);
-							State.rpcQueue.push(new CmdCheckMurder(selectedPlayer));
-							framesPassed = 40;
-                    }
+					if (IsInGame() && PlayerIsImpostor(GetPlayerData(*Game::pLocalPlayer))
+						&& !selectedPlayer.get_PlayerData()->fields.IsDead
+						&& !selectedPlayer.get_PlayerControl()->fields.inVent
+						&& !selectedPlayer.get_PlayerControl()->fields.inMovingPlat
+						&& !GetPlayerData(*Game::pLocalPlayer)->fields.IsDead && ((*Game::pLocalPlayer)->fields.killTimer <= 0.0f)
+						&& selectedPlayer.get_PlayerControl()->fields.protectedByGuardianId < 0
+						&& !State.InMeeting)
+					{
+						if (ImGui::Button("Kill"))
+						{
+							State.rpcQueue.push(new CmdCheckMurder(State.selectedPlayer));
+						}
+					}
 
 					if (framesPassed == 0)
 					{
