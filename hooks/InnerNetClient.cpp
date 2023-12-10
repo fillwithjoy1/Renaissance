@@ -14,6 +14,11 @@
 void dInnerNetClient_Update(InnerNetClient* __this, MethodInfo* method)
 {
 
+    if (State.NoAbilityCD) {
+        if (GameLogicOptions().GetKillCooldown() > 0)
+            (*Game::pLocalPlayer)->fields.killTimer = 0;
+    }
+
     if (!IsInLobby()) {
         State.LobbyTimer = -1;
     }
