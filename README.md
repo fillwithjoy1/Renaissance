@@ -2,7 +2,7 @@
 A small Among Us fork that aims to copy the features that SickoModeAU brings, but with a **focus on stability, because nobody likes a mod that keeps crashing.**
 
 Extra features:
-- Empty
+- Sabotage All
 
 # AmongUsMenu [![Discord](https://img.shields.io/badge/Discord-Invite-7289DA.svg?logo=Discord&style=flat-square)](https://discord.gg/AUpXd3VUh8) [![Paypal](https://img.shields.io/badge/PayPal-Donate-Green.svg?logo=Paypal&style=flat-square)](https://www.paypal.com/donate/?hosted_button_id=TYMU92FD9D9UW)
 
