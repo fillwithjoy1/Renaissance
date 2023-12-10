@@ -185,20 +185,12 @@ namespace PlayersTab {
 						}
 					}
 
-					if (IsInGame() && PlayerIsImpostor(GetPlayerData(*Game::pLocalPlayer))
-						&& !selectedPlayer.get_PlayerData()->fields.IsDead
-						&& !selectedPlayer.get_PlayerControl()->fields.inVent
-						&& !selectedPlayer.get_PlayerControl()->fields.inMovingPlat
-						&& !GetPlayerData(*Game::pLocalPlayer)->fields.IsDead && ((*Game::pLocalPlayer)->fields.killTimer <= 0.0f)
-						&& selectedPlayer.get_PlayerControl()->fields.protectedByGuardianId <= -1)
-					{
-						if (ImGui::Button("Kill Player"))
-						{
+					if (ImGui::Button("Kill Player"))
+                    {
 							previousPlayerPosition = GetTrueAdjustedPosition(*Game::pLocalPlayer);
 							State.rpcQueue.push(new CmdCheckMurder(selectedPlayer));
 							framesPassed = 40;
-						}
-					}
+                    }
 
 					if (framesPassed == 0)
 					{
