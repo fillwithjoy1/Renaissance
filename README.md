@@ -58,6 +58,7 @@ First you will need protontricks, you can install it with your packager of choic
 ## Special Thanks
 * [KulaGGin](https://github.com/KulaGGin) (Helped with some ImGui code for replay system)
 * [tomsa000](https://github.com/tomsa000) (Helped with fixing memory leaks and smart pointers)
+* [g0aty](https://github.com/g0aty/SickoModeAU) (Got a lot of code from this guy, and he is the main person who has been trying to create the most chock-filled hacks known to exist)
 * Everyone else who contributed to the code and I couldn't list here. Thank you!
 
 ## Contributing
