@@ -72,6 +72,9 @@ void dVersionShower_Start(VersionShower* __this, MethodInfo* method) {
 void dPingTracker_Update(PingTracker* __this, MethodInfo* method) {
     app::PingTracker_Update(__this, method);
     try {
+        std::string pingText = std::format("{}\nTest", ping);
+        app::TMP_Text_set_alignment((app::TMP_Text*)__this->fields.text, app:TextAlignmentOptions__Enum::TopRight, nullptr);
+        app::TMP_Text_set_text((app::TMP_Text*)__this->fields.text, convert_to_string(pingText), nullptr);
     }
     catch (...) {
         LOG_DEBUG("Exception occured in PingTracker_Update (HudManager.cpp)");
