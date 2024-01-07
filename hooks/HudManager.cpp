@@ -68,3 +68,12 @@ void dVersionShower_Start(VersionShower* __this, MethodInfo* method) {
 	app::TMP_Text_set_alignment((app::TMP_Text*)__this->fields.text, app::TextAlignmentOptions__Enum::TopLeft, nullptr);
 	app::TMP_Text_set_text((app::TMP_Text*)__this->fields.text, convert_to_string(versionText), nullptr);
 }
+
+void dPingTracker_Update(PingTracker* __this, MethodInfo* method) {
+    app::PingTracker_Update(__this, method);
+    try {
+    }
+    catch (...) {
+        LOG_DEBUG("Exception occured in PingTracker_Update (HudManager.cpp)");
+    }
+}
