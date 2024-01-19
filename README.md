@@ -1,5 +1,5 @@
 # Renaissance
-A small Among Us fork that aims to copy the features that SickoModeAU brings, but with a **focus on stability, because nobody likes a mod that keeps crashing.**
+An Among Us fork with some features added. No guarantees of any future updates!
 
 Extra features:
 - Sabotage All
